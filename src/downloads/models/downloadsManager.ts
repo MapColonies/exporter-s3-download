@@ -37,7 +37,7 @@ export class DownloadsManager {
     //bucket property is ignored and full path must be used if key contains /
     const options: S3.GetObjectRequest = {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Bucket: '',
+        Bucket: this.s3Config.bucket,
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Key: `${this.s3Config.bucket}/${file.directory}/${file.fileName}`,
     };
