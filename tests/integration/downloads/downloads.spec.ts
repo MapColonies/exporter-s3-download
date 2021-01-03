@@ -12,6 +12,7 @@ describe('downloads', function () {
     container.clearInstances();
   });
 
+  //TODO: add integration tests
   describe('Happy Path', function () {
       //download the file
   });

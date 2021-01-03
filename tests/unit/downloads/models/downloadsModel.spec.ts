@@ -21,12 +21,13 @@ describe('DownloadsManager', () => {
   });
 
   describe('download', () => {
+    //TODO: mock s3
     it('return the resource of id 1', function () {
       const fileName = 'testFile'
       // action
       const resource = downloadsManager.download({
         directory:'testDir',
-        file: fileName
+        fileName: fileName
       });
 
       // expectation
