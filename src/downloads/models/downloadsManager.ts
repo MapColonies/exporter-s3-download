@@ -22,7 +22,7 @@ export class DownloadsManager {
   private readonly s3:  S3;
   public constructor(@inject(Services.LOGGER) private readonly logger: ILogger,
     @inject(Services.CONFIG) config: IConfig) {
-      this.s3Config = config.get<IS3Config>('s3'); 
+      this.s3Config = config.get<IS3Config>('S3'); 
       this.s3 = new S3({
         credentials:{
           accessKeyId:  this.s3Config.accessKeyId,
