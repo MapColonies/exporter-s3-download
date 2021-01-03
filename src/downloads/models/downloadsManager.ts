@@ -8,7 +8,7 @@ import { IS3Config } from '../interfaces';
 
 export interface IS3Key {
   directory: string;
-  file: string;
+  fileName: string;
 }
 
 export interface IFile {
@@ -34,16 +34,16 @@ export class DownloadsManager {
 
 
   public download(file: IS3Key): IFile {
+    //bucket property is ignored and full path must be used if key contains /
     const options: S3.GetObjectRequest = {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Bucket: this.s3Config.bucket,
+        Bucket: '',
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Key: `${file.directory}/${file.file}`,
+        Key: `${this.s3Config.bucket}/${file.directory}/${file.fileName}`,
     };
-
     const fileStream = this.s3.getObject(options).createReadStream();
     return {
-      name: file.file,
+      name: file.fileName,
       contentStream: fileStream
     };
   }

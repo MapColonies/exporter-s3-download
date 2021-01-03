@@ -7,7 +7,7 @@ const downloadsRouterFactory: FactoryFunction<Router> = (dependencyContainer) =>
   const router = Router();
   const controller = dependencyContainer.resolve(DownloadsController);
 
-  router.get('/:directory/:file', validate, controller.getResource);
+  router.get('/:directory/:fileName', validate, controller.getResource);
 
   return router;
 };
