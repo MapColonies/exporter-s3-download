@@ -11,6 +11,6 @@ export async function init(): Promise<void> {
   app = await builder.build();
 }
 
-export async function getResource(): Promise<supertest.Response> {
-  return supertest.agent(app).get('/resourceName').set('Content-Type', 'application/json');
+export async function download(directory: string, file:string): Promise<supertest.Response> {
+  return supertest.agent(app).get(`/download/${directory}/${file}`);
 }

@@ -1,20 +1,37 @@
-import { ResourceNameManager } from '../../../../src/resourceName/models/resourceNameManager';
+import { IConfig } from 'config';
+import { IS3Config } from '../../../../src/downloads/interfaces';
+import { DownloadsManager } from '../../../../src/downloads/models/downloadsManager';
 
-let resourceNameManager: ResourceNameManager;
+let downloadsManager: DownloadsManager;
+const s3Config: IS3Config ={
+  accessKeyId: 'testId',
+  secretAccessKey: 'testSecret',
+  endpoint: 'testEndpoint',
+  bucket: 'testBucket'
+} 
+const configMock: IConfig = {
+  get: jest.fn().mockReturnValue(s3Config),
+  has: jest.fn(),
+  util: undefined
+}
 
-describe('ResourceNameManager', () => {
+describe('DownloadsManager', () => {
   beforeEach(function () {
-    resourceNameManager = new ResourceNameManager({ log: jest.fn() });
+    downloadsManager = new DownloadsManager({ log: jest.fn() }, configMock );
   });
-  describe('#getResource', () => {
+
+  describe('download', () => {
     it('return the resource of id 1', function () {
+      const fileName = 'testFile'
       // action
-      const resource = resourceNameManager.getResource();
+      const resource = downloadsManager.download({
+        directory:'testDir',
+        file: fileName
+      });
 
       // expectation
-      expect(resource.id).toEqual(1);
-      expect(resource.name).toEqual('ronin');
-      expect(resource.description).toEqual('can you do a logistics run?');
+      expect(resource.name).toEqual(fileName);
+      
     });
   });
 });

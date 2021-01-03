@@ -10,5 +10,11 @@
   },
   "server": {
     "port": "8080"
+  },
+  "S3":{
+    "accessKeyId" : "minioadmin",
+    "secretAccessKey": "minioadmin",
+    "endpoint": "http://localhost:9000",
+    "bucket": "mapping-images"
   }
 }
