@@ -17,6 +17,9 @@ export class DownloadsController {
     try{
       const file =this.manager.download(req.params as unknown as IS3Key)
       res = res.status(httpStatus.OK).attachment(file.name);
+      file.contentStream.on('error',err =>{
+        next(err);
+      })
       file.contentStream.pipe(res);
     }
     catch(err){
