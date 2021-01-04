@@ -26,7 +26,7 @@ lint:
       prefixes: ['should', 'is', 'has']
     no-unused-components:
       severity: error
-    path-not-include-query:
+    path-parameters-defined:
       severity: off
 
   decorators:
