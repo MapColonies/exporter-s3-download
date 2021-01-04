@@ -4,7 +4,7 @@ import { injectable, inject } from 'tsyringe';
 import { Services } from '../../common/constants';
 import { ILogger } from '../../common/interfaces';
 
-import { DownloadsManager, IS3Key } from '../models/downloadsManager';
+import { DownloadsManager } from '../models/downloadsManager';
 import { NotFoundError } from '../../common/exceptions/notFoundError';
 import { BadRequestError } from '../../common/exceptions/badRequestError';
 
@@ -15,24 +15,23 @@ export class DownloadsController {
     @inject(DownloadsManager) private readonly manager: DownloadsManager
   ) {}
 
-  public getResource: RequestHandler = (req, res, next) => {
-    try{
-      const file =this.manager.download(req.params as unknown as IS3Key)
+  public getResource: RequestHandler<{ key: string }> = (req, res, next) => {
+    try {
+      const file = this.manager.download(req.params.key);
       res = res.status(httpStatus.OK).attachment(file.name);
-      file.contentStream.on('error',err =>{
+      file.contentStream.on('error', (err) => {
         this.cleanResOnError(res);
         this.handleS3Error(err, next);
-      })
+      });
       file.contentStream.pipe(res);
-    }
-    catch(err){
+    } catch (err) {
       this.cleanResOnError(res);
       this.handleS3Error(err, next);
     }
   };
- 
+
   private handleS3Error(err: Error, next: NextFunction): void {
-    const error = err as Error & { statusCode?: number; };
+    const error = err as Error & { statusCode?: number };
     if (error.statusCode === httpStatus.NOT_FOUND) {
       const notFound = new NotFoundError(error);
       next(notFound);
@@ -44,9 +43,8 @@ export class DownloadsController {
     }
   }
 
-  private cleanResOnError(res:Response): void{ 
+  private cleanResOnError(res: Response): void {
     res.removeHeader('content-disposition');
     res.contentType('application/json');
   }
-
 }
