@@ -43,6 +43,6 @@ export class ServerBuilder {
   private registerMiddleware(): void {
     this.logger.log('debug', 'Registering middlewares');
     this.serverInstance.use(bodyParser.json());
-    this.serverInstance.use(this.requestLogger.getLoggerMiddleware());  
+    this.serverInstance.use(this.requestLogger.getLoggerMiddleware());
   }
 }

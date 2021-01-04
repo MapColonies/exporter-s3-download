@@ -19,22 +19,20 @@ export class ErrorHandler {
       next: NextFunction
     ): void => {
       let status: number;
-      let body:unknown;
+      let body: unknown;
       if (err instanceof InputValidationError) {
         status = StatusCodes.BAD_REQUEST;
-        body ={ 
-          message:'request validation failed',
+        body = {
+          message: 'request validation failed',
           validationErrors: err.errors,
-        }
+        };
       } else if (err instanceof HttpError) {
         status = err.status;
         body = {
-          message: err.message
+          message: err.message,
         };
       } else {
-        this.logger.log('error',
-          `${req.method} request to ${req.originalUrl}  has failed with error: ${err.message}`
-        );
+        this.logger.log('error', `${req.method} request to ${req.originalUrl}  has failed with error: ${err.message}`);
         status = StatusCodes.INTERNAL_SERVER_ERROR;
         if (process.env.NODE_ENV === 'development') {
           body = {
@@ -43,7 +41,7 @@ export class ErrorHandler {
           };
         } else {
           body = {
-            message: 'Internal Server Error'
+            message: 'Internal Server Error',
           };
         }
       }

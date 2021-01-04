@@ -13,6 +13,6 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   moduleNameMapper: {
-    mockService: "<rootDir>/src/tests/__mocks__"
+    mockService: '<rootDir>/src/tests/__mocks__',
   },
 };
