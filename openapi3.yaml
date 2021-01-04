@@ -19,7 +19,6 @@ paths:
         - name: key
           in: path
           required: true
-          type: string
       responses:
         200:
           description: OK
@@ -30,5 +29,6 @@ paths:
                 format: binary
           headers:
             Content-Disposition:
-              type: string
               description: the value is `attachment; filename="<file name>"`
+              schema:
+                type: string
