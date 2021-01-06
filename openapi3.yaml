@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: service-name
-  description: basic template for map colonies service
+  title: exporter-S3-downloads
+  description: map exporter S3 download proxy
   version: 1.0.0
   license:
     name: MIT
@@ -9,57 +9,26 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /resourceName:
+  /download/{/key}:
     get:
-      operationId: getResourceName
+      operationId: download
       tags:
-        - resourceName
-      summary: gets the resource
+        - downloads
+      summary: download the requested file
+      parameters:
+        - name: key
+          in: path
+          required: true
       responses:
         200:
           description: OK
           content:
-            application/json:
+            application/octet-stream:
               schema:
-                $ref: '#/components/schemas/resource'
-    post:
-      operationId: createResource
-      tags:
-        - resourceName
-      summary: creates a new record of type resource
-      responses:
-        201:
-          description: created
-          content:
-            application/json:
+                type: string
+                format: binary
+          headers:
+            Content-Disposition:
+              description: the value is `attachment; filename="<file name>"`
               schema:
-                $ref: '#/components/schemas/resource'
-        400:
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/error'
-components:
-  schemas:
-    error:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          type: string
-    resource:
-      required:
-        - id
-        - name
-        - description
-      type: object
-      properties:
-        id:
-          type: number
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
+                type: string
