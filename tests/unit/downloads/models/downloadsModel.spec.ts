@@ -10,6 +10,7 @@ const s3Config: IS3Config = {
   secretAccessKey: 'testSecret',
   endpoint: 'testEndpoint',
   bucket: 'testBucket',
+  forcePathStyle: true,
 };
 const configMock: IConfig = {
   get: jest.fn().mockReturnValue(s3Config),
@@ -42,7 +43,7 @@ describe('DownloadsManager', () => {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Bucket: s3Config.bucket,
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Key: `${s3Config.bucket}/${directory}/${fileName}`,
+        Key: `${directory}/${fileName}`,
       });
       expect(s3Mocks.createReadStream).toHaveBeenCalledTimes(1);
       expect(file.name).toEqual(fileName);

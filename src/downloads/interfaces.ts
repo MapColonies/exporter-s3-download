@@ -3,4 +3,5 @@ export interface IS3Config {
   secretAccessKey: string;
   endpoint: string;
   bucket: string;
+  forcePathStyle: boolean;
 }

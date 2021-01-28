@@ -9,7 +9,7 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /download/{/key}:
+  /download/{key}:
     get:
       operationId: download
       tags:
@@ -19,6 +19,8 @@ paths:
         - name: key
           in: path
           required: true
+          schema:
+            type: string
       responses:
         200:
           description: OK
@@ -32,3 +34,5 @@ paths:
               description: the value is `attachment; filename="<file name>"`
               schema:
                 type: string
+        404:
+          description: NOT FOUND
