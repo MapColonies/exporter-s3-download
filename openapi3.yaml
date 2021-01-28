@@ -16,11 +16,11 @@ paths:
         - downloads
       summary: download the requested file
       parameters:
-      - name: key
-        in: path
-        required: true
-        schema:
-          type: string
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: OK

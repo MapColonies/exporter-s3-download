@@ -10,7 +10,7 @@ const s3Config: IS3Config = {
   secretAccessKey: 'testSecret',
   endpoint: 'testEndpoint',
   bucket: 'testBucket',
-  forcePathStyle: true
+  forcePathStyle: true,
 };
 const configMock: IConfig = {
   get: jest.fn().mockReturnValue(s3Config),
