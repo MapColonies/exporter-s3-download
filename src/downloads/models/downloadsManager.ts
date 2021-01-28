@@ -22,12 +22,11 @@ export class DownloadsManager {
         secretAccessKey: this.s3Config.secretAccessKey,
       },
       endpoint: this.s3Config.endpoint,
-      s3ForcePathStyle: this.s3Config.s3ForcePathStyle
+      s3ForcePathStyle: this.s3Config.forcePathStyle
     });
   }
 
   public download(fileKey: string): IFile {
-    //bucket property is ignored and full path must be used if key contains /
     const options: S3.GetObjectRequest = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Bucket: this.s3Config.bucket,

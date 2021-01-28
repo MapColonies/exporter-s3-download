@@ -34,3 +34,5 @@ paths:
               description: the value is `attachment; filename="<file name>"`
               schema:
                 type: string
+        404:
+          description: NOT FOUND

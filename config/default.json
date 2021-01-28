@@ -16,6 +16,6 @@
     "secretAccessKey": "minioadmin",
     "endpoint": "http://localhost:9000",
     "bucket": "mapping-images",
-    "s3ForcePathStyle": true
+    "forcePathStyle": true
   }
 }

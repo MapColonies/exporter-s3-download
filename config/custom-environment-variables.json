@@ -13,6 +13,6 @@
     "secretAccessKey": "S3_SECRET_ACCESS_KEY",
     "endpoint": "S3_ENDPOINT",
     "bucket": "S3_BUCKET",
-    "s3ForcePathStyle": "S3_FORCE_PATH_STYLE"
+    "forcePathStyle": "S3_FORCE_PATH_STYLE"
   }
 }
