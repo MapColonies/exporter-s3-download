@@ -9,16 +9,18 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /download/{/key}:
+  /download/{key}:
     get:
       operationId: download
       tags:
         - downloads
       summary: download the requested file
       parameters:
-        - name: key
-          in: path
-          required: true
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         200:
           description: OK

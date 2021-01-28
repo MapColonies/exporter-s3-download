@@ -15,9 +15,10 @@ export class DownloadsController {
     @inject(DownloadsManager) private readonly manager: DownloadsManager
   ) {}
 
-  public getResource: RequestHandler<{ key: string }> = (req, res, next) => {
+  public getResource: RequestHandler<{ '0': string, key: string }> = (req, res, next) => {
     try {
-      const file = this.manager.download(req.params.key);
+      const fileName = req.params.key + req.params['0'];
+      const file = this.manager.download(fileName);
       res = res.status(httpStatus.OK).attachment(file.name);
       file.contentStream.on('error', (err) => {
         this.cleanResOnError(res);

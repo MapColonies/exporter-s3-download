@@ -22,6 +22,7 @@ export class DownloadsManager {
         secretAccessKey: this.s3Config.secretAccessKey,
       },
       endpoint: this.s3Config.endpoint,
+      s3ForcePathStyle: this.s3Config.s3ForcePathStyle
     });
   }
 
@@ -31,7 +32,7 @@ export class DownloadsManager {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Bucket: this.s3Config.bucket,
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      Key: `${this.s3Config.bucket}/${fileKey}`,
+      Key: fileKey
     };
     const fileStream = this.s3.getObject(options).createReadStream();
     const keyTokens = fileKey.split('/');
