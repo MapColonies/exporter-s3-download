@@ -22,7 +22,18 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - uses: actions/upload-artifact@v2
+      - name: Azure Pipelines Action
+        uses: Azure/pipelines@v1
         with:
-          name: Test Reporters
-          path: reports/**
+            azure-devops-project-url: https://dev.azure.com/Libot-Mipui-Org/exporter-s3-download
+            azure-pipeline-name: 'build-and-push-to-ACR'
+            azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}  
