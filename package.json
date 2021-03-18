@@ -39,7 +39,7 @@
     "@map-colonies/mc-logger": "^1.2.1",
     "@map-colonies/mc-model-types": "^1.0.1",
     "@map-colonies/mc-probe": "^1.0.0",
-    "aws-sdk": "^2.820.0",
+    "aws-sdk": "^2.827.0",
     "config": "^3.3.3",
     "express": "^4.17.1",
     "http-status-codes": "^2.1.4",
